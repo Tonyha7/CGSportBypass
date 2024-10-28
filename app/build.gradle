@@ -1,0 +1,32 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.th7.cgsportbypass'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.th7.cgsportbypass"
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compileOnly files('libs\\XposedBridgeApi-82.jar')
+}
