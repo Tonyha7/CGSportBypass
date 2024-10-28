@@ -5,8 +5,8 @@ import android.content.Context;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.XC_MethodHook;
 
-public class CGSportsHook {
-    public static void hook(ClassLoader classLoader) throws Throwable {
+public class BypassDetectors {
+    public static void hook_2_9_8(ClassLoader classLoader) throws Throwable {
         //Xposed
         XposedHelpers.findAndHookMethod("縰丒鰬湓篚爀槽蟡塱溹斠.熏燵婨左崘畱噛淜.櫼螉彬彆.阙蔬", classLoader, "帋岫", new XC_MethodHook() {
             @Override
