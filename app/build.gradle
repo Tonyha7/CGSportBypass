@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.th7.cgsportbypass'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.th7.cgsportbypass"
@@ -17,7 +17,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -29,4 +29,5 @@ android {
 
 dependencies {
     compileOnly files('libs\\XposedBridgeApi-82.jar')
+    implementation 'org.litepal.guolindev:core:3.2.3'
 }

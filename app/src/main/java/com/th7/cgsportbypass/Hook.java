@@ -23,7 +23,7 @@ public class Hook implements IXposedHookLoadPackage {
                 Context context = (Context) param.args[0];
                 long version = AppInfo.getAppVersionCode(context);
                 ClassLoader classLoader = context.getClassLoader();
-                XposedBridge.log("CGSportsBypass: Got Application Version Code: "+version);
+                XposedBridge.log("CGSportsBypass: Got Application Version Code: "+ version);
                 startHook(classLoader, version);
             }
         });
@@ -33,11 +33,12 @@ public class Hook implements IXposedHookLoadPackage {
         switch ((int) versionCode){
             case 118:
                 BypassDetectors.hook_2_9_8(classLoader);
-                SportCheat.hook_2_9_8(classLoader);
+                //SportCheat.hook_2_9_8(classLoader);
                 break;
             default:
                 XposedBridge.log("CGSportsBypass: Not Supporting Your Version Now... Just Give A Star to https://github.com/Tonyha7/CGSportBypass And Wait ;)");
                 break;
         }
+        //SharedPreferencesListener.hook(classLoader);
     }
 }
