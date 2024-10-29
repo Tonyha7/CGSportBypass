@@ -1,9 +1,6 @@
 package com.th7.cgsportbypass;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -36,6 +33,7 @@ public class Hook implements IXposedHookLoadPackage {
         switch ((int) versionCode){
             case 118:
                 BypassDetectors.hook_2_9_8(classLoader);
+                SportCheat.hook_2_9_8(classLoader);
                 break;
             default:
                 XposedBridge.log("CGSportsBypass: Not Supporting Your Version Now... Just Give A Star to https://github.com/Tonyha7/CGSportBypass And Wait ;)");
