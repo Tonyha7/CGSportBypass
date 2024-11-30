@@ -29,5 +29,4 @@ android {
 
 dependencies {
     compileOnly files('libs\\XposedBridgeApi-82.jar')
-    implementation 'org.litepal.guolindev:core:3.2.3'
 }

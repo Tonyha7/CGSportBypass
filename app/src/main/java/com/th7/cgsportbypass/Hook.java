@@ -34,6 +34,7 @@ public class Hook implements IXposedHookLoadPackage {
             case 118:
                 BypassDetectors.hook_2_9_8(classLoader);
                 //SportCheat.hook_2_9_8(classLoader);
+                DeviceFake.hook_2_9_8(classLoader);
                 break;
             default:
                 XposedBridge.log("CGSportsBypass: Not Supporting Your Version Now... Just Give A Star to https://github.com/Tonyha7/CGSportBypass And Wait ;)");
