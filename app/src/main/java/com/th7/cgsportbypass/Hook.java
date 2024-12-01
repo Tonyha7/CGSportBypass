@@ -21,7 +21,7 @@ public class Hook implements IXposedHookLoadPackage {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 super.afterHookedMethod(param);
                 Context context = (Context) param.args[0];
-                long version = AppInfo.getAppVersionCode(context);
+                String version = AppInfo.getAppVersionCode(context);
                 ClassLoader classLoader = context.getClassLoader();
                 XposedBridge.log("CGSportsBypass: Got Application Version Code: "+ version);
                 startHook(classLoader, version);
@@ -29,12 +29,17 @@ public class Hook implements IXposedHookLoadPackage {
         });
     }
 
-    public static void startHook(ClassLoader classLoader, long versionCode) throws Throwable {
-        switch ((int) versionCode){
-            case 118:
+    public static void startHook(ClassLoader classLoader, String version) throws Throwable {
+        switch (version){
+            case "2.9.8":
                 BypassDetectors.hook_2_9_8(classLoader);
                 //SportCheat.hook_2_9_8(classLoader);
                 DeviceFake.hook_2_9_8(classLoader);
+                break;
+            case "3.0.0":
+                BypassDetectors.hook_3_0_0(classLoader);
+                //SportCheat.hook_3_0_0(classLoader);
+                DeviceFake.hook_3_0_0(classLoader);
                 break;
             default:
                 XposedBridge.log("CGSportsBypass: Not Supporting Your Version Now... Just Give A Star to https://github.com/Tonyha7/CGSportBypass And Wait ;)");

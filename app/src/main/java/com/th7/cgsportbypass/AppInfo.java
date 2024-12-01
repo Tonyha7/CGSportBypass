@@ -6,19 +6,14 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 public class AppInfo {
-    public static long getAppVersionCode(Context context) {
+    public static String getAppVersionCode(Context context) {
         try {
             PackageManager packageManager = context.getPackageManager();
-            PackageInfo packageInfo = packageManager.getPackageInfo(
-                    context.getPackageName(), 0);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                return packageInfo.getLongVersionCode();
-            } else {
-                return packageInfo.versionCode;
-            }
-        } catch (Exception e) {
+            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            return String.valueOf(packageInfo.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            return -1;
+            return "";
         }
     }
 }

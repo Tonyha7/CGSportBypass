@@ -24,6 +24,16 @@ public class DeviceFake {
         });
     }
 
+    public static void hook_3_0_0(ClassLoader classLoader) throws Throwable {
+        XposedHelpers.findAndHookMethod("珂函筙.櫼螉彬彆.亏雄開邠煱嘂咔娡葘戭.阙蔬.熏燵婨左崘畱噛淜", classLoader, "墓侎擠嗙擱欖鎘徺", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                super.beforeHookedMethod(param);
+                param.setResult(genAndroidId());
+            }
+        });
+    }
+
     private static String genAndroidId() {
         return UUID.randomUUID().toString().replaceAll("-", "").substring(0, 16);
     }
