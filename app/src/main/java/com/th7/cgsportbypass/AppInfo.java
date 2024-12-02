@@ -3,7 +3,6 @@ package com.th7.cgsportbypass;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 
 public class AppInfo {
     public static String getAppVersionCode(Context context) {
