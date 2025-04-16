@@ -7,19 +7,22 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 
 public class DeviceFake {
+    static String android_id = genAndroidId();
+    static String imei = genImei();
+
     public static void hook_2_9_8(ClassLoader classLoader) throws Throwable {
         XposedHelpers.findAndHookMethod("珂函筙.櫼螉彬彆.亏雄開邠煱嘂咔娡葘戭.阙蔬.熏燵婨左崘畱噛淜", classLoader, "卋箐茺", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 super.beforeHookedMethod(param);
-                param.setResult(genAndroidId());
+                param.setResult(android_id);
             }
         });
         XposedHelpers.findAndHookMethod("珂函筙.櫼螉彬彆.亏雄開邠煱嘂咔娡葘戭.阙蔬.熏燵婨左崘畱噛淜", classLoader, "线渠恮櫤陷樆撤扠歼蝚僛旴", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 super.beforeHookedMethod(param);
-                param.setResult(genImei());
+                param.setResult(imei);
             }
         });
     }
@@ -29,7 +32,17 @@ public class DeviceFake {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 super.beforeHookedMethod(param);
-                param.setResult(genAndroidId());
+                param.setResult(android_id);
+            }
+        });
+    }
+
+    public static void hook_3_0_2(ClassLoader classLoader) {
+        XposedHelpers.findAndHookMethod("珂函筙.櫼螉彬彆.亏雄開邠煱嘂咔娡葘戭.阙蔬.熏燵婨左崘畱噛淜", classLoader, "嬫鳚埑鵵嬴瞥湦", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                super.beforeHookedMethod(param);
+                param.setResult(android_id);
             }
         });
     }

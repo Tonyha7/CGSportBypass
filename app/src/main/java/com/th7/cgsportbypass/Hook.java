@@ -16,30 +16,53 @@ public class Hook implements IXposedHookLoadPackage {
     }
 
     public static void dingXiangAttach(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
-        XposedHelpers.findAndHookMethod("com.security.shell.AppStub1", loadPackageParam.classLoader, "_attachBaseContext", Context.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                super.afterHookedMethod(param);
-                Context context = (Context) param.args[0];
-                String version = AppInfo.getAppVersionCode(context);
-                ClassLoader classLoader = context.getClassLoader();
-                XposedBridge.log("CGSportsBypass: Got Application Version Code: "+ version);
-                startHook(classLoader, version);
+        try {
+            XposedHelpers.findAndHookMethod("com.security.shell.AppStub1", loadPackageParam.classLoader,
+                    "_attachBaseContext", Context.class, new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            super.afterHookedMethod(param);
+                            Context context = (Context) param.args[0];
+                            String version = AppInfo.getAppVersionCode(context);
+                            ClassLoader classLoader = context.getClassLoader();
+                            XposedBridge.log("CGSportsBypass: Got Application Version Code: " + version);
+                            startHook(classLoader, version);
+                        }
+                    });
+        } catch (XposedHelpers.ClassNotFoundError | NoSuchMethodError e) {
+            try {
+                XposedBridge.log("CGSportsBypass: AppStub1 not found, trying V5App instead");
+                XposedHelpers.findAndHookMethod("com.security.shell.V5App", loadPackageParam.classLoader,
+                        "_attachBaseContext", Context.class, new XC_MethodHook() {
+                            @Override
+                            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                super.afterHookedMethod(param);
+                                Context context = (Context) param.args[0];
+                                String version = AppInfo.getAppVersionCode(context);
+                                ClassLoader classLoader = context.getClassLoader();
+                                XposedBridge.log("CGSportsBypass: Got Application Version Code: " + version);
+                                startHook(classLoader, version);
+                            }
+                        });
+            } catch (XposedHelpers.ClassNotFoundError | NoSuchMethodError e2) {
+                XposedBridge.log("CGSportsBypass: Failed to hook both AppStub1 and V5App: " + e2.getMessage());
             }
-        });
+        }
     }
 
     public static void startHook(ClassLoader classLoader, String version) throws Throwable {
         switch (version){
             case "2.9.8":
                 BypassDetectors.hook_2_9_8(classLoader);
-                //SportCheat.hook_2_9_8(classLoader);
                 DeviceFake.hook_2_9_8(classLoader);
                 break;
             case "3.0.0":
                 BypassDetectors.hook_3_0_0(classLoader);
-                //SportCheat.hook_3_0_0(classLoader);
                 DeviceFake.hook_3_0_0(classLoader);
+                break;
+            case "3.0.2":
+                BypassDetectors.hook_3_0_2(classLoader);
+                DeviceFake.hook_3_0_2(classLoader);
                 break;
             default:
                 XposedBridge.log("CGSportsBypass: Not Supporting Your Version Now... Just Give A Star to https://github.com/Tonyha7/CGSportBypass And Wait ;)");
