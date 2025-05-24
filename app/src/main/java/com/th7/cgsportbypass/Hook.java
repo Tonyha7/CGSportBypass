@@ -60,6 +60,10 @@ public class Hook implements IXposedHookLoadPackage {
                 BypassDetectors.hook_3_0_0(classLoader);
                 DeviceFake.hook_3_0_0(classLoader);
                 break;
+            case "3.0.1":
+                BypassDetectors.hook_3_0_1(classLoader);
+                DeviceFake.hook_3_0_1(classLoader);
+                break;
             case "3.0.2":
                 BypassDetectors.hook_3_0_2(classLoader);
                 DeviceFake.hook_3_0_2(classLoader);
