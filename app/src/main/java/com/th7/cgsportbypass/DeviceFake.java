@@ -36,7 +36,15 @@ public class DeviceFake {
             }
         });
     }
-
+    public static void hook_3_0_1(ClassLoader classLoader) throws Throwable{
+        XposedHelpers.findAndHookMethod("珂函筙.櫼螉彬彆.亏雄開邠煱嘂咔娡葘戭.阙蔬.熏燵婨左崘畱噛淜", classLoader, "峹顈竦恤鞬秜颅槺塇踚", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                super.beforeHookedMethod(param);
+                param.setResult(android_id);
+            }
+        });
+    }
     public static void hook_3_0_2(ClassLoader classLoader) {
         XposedHelpers.findAndHookMethod("珂函筙.櫼螉彬彆.亏雄開邠煱嘂咔娡葘戭.阙蔬.熏燵婨左崘畱噛淜", classLoader, "嬫鳚埑鵵嬴瞥湦", new XC_MethodHook() {
             @Override
